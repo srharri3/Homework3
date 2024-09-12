@@ -1,0 +1,46 @@
+---
+title: "HW3"
+format: html
+editor: visual
+---
+
+# Homework 3
+
+```{r}
+load("hw2_list.rda")
+```
+
+# Task 1: Control Flow Practice
+```{r}
+bp_list$treatment$status <- character(20)
+bp_list$placebo$status <- character(10)
+```
+Create a for loop and use if/then/else logic to create the status column’s values for treatment.
+```{r}
+status_list <- c()
+for (i in bp_list$treatment$post_bp) {
+  if (i <= 120) {
+    status_list <- append(status_list,"optimal")
+  } else if (i > 120 & i <= 130) {
+   status_list <- append(status_list,"borderline")
+  } else  {status_list <- append(status_list,"high")
+  }}
+bp_list$treatment$status <- status_list
+```
+Create a for loop and use if/then/else logic to create the status column’s values for placebo.
+```{r}
+status_list2 <- c()
+for (i in bp_list$placebo$post_bp) {
+  if (i <= 120) {
+    status_list2 <- append(status_list2,"optimal")
+  } else if (i > 120 & i <= 130) {
+   status_list2 <- append(status_list2,"borderline")
+  } else  {status_list2 <- append(status_list2,"high")
+  }}
+bp_list$placebo$status <- status_list2
+```
+
+# Task 2: Function Writing
+
+
+
