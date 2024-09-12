@@ -41,6 +41,58 @@ bp_list$placebo$status <- status_list2
 ```
 
 # Task 2: Function Writing
+Creating function with default value set to mean. Getting the function from the quoted string using my_fun <- get(stat). Returning a named list with stat values.
+```{r}
+summary_stats <- function(bp_list, stat = "mean") {
+ my_fun <- get(stat)
 
+ treatment <- bp_list[[1]]
+ placebo <- bp_list[[2]]
+ 
+ treatment_pre_stat <- my_fun(treatment$pre_bp, na.rm = TRUE)
+ treatment_post_stat <- my_fun(treatment$post_bp, na.rm = TRUE)
+ treatment_diff_stat <- my_fun(placebo$diff_bp, na.rm = TRUE)
+ 
+ placebo_pre_stat <- my_fun(placebo$pre_bp, na.rm = TRUE)
+ placebo_post_stat <- my_fun(placebo$post_bp, na.rm = TRUE)
+ placebo_diff_stat <- my_fun(placebo$diff_bp, na.rm = TRUE)
 
+ stat_names <- c(
+  paste0(stat, "TreatmentPre"),
+   paste0(stat, "TreatmentPost"),
+   paste0(stat, "TreatmentDiff"),
+   paste0(stat, "PlaceboPre"),
+   paste0(stat, "PlaceboPost"),
+   paste0(stat, "PlaceboDiff")
+  )
+ 
+ stat_values <- c(
+  treatment_pre_stat,
+  treatment_post_stat,
+  treatment_diff_stat,
+  placebo_pre_stat,
+  placebo_post_stat,
+  placebo_diff_stat
+)
+ 
+ names(stat_values) <- stat_names
+ 
+ return(stat_values)
+}
+```
+
+Applying function to list of data frames.
+```{r}
+var_stat <- summary_stats(bp_list, "var")
+print(var_stat)
+
+sd_stat <- summary_stats(bp_list, "sd")
+print(sd_stat)
+
+min_stat <- summary_stats(bp_list, "sd")
+print(min_stat)
+
+max_stat <- summary_stats(bp_list, "max")
+print(max_stat)
+```
 

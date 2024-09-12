@@ -135,6 +135,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="task-2-function-writing" class="level1">
 <h1>Task 2: Function Writing</h1>
+<p>Creating function with default value set to mean. Getting the function from the quoted string using my_fun &lt;- get(stat). Returning a named list with stat values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="ot">&lt;-</span> <span class="cf">function</span>(bp_list, <span class="at">stat =</span> <span class="st">"mean"</span>) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a> my_fun <span class="ot">&lt;-</span> <span class="fu">get</span>(stat)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> treatment <span class="ot">&lt;-</span> bp_list[[<span class="dv">1</span>]]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a> placebo <span class="ot">&lt;-</span> bp_list[[<span class="dv">2</span>]]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a> treatment_pre_stat <span class="ot">&lt;-</span> <span class="fu">my_fun</span>(treatment<span class="sc">$</span>pre_bp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a> treatment_post_stat <span class="ot">&lt;-</span> <span class="fu">my_fun</span>(treatment<span class="sc">$</span>post_bp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a> treatment_diff_stat <span class="ot">&lt;-</span> <span class="fu">my_fun</span>(placebo<span class="sc">$</span>diff_bp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a> placebo_pre_stat <span class="ot">&lt;-</span> <span class="fu">my_fun</span>(placebo<span class="sc">$</span>pre_bp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a> placebo_post_stat <span class="ot">&lt;-</span> <span class="fu">my_fun</span>(placebo<span class="sc">$</span>post_bp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a> placebo_diff_stat <span class="ot">&lt;-</span> <span class="fu">my_fun</span>(placebo<span class="sc">$</span>diff_bp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a> stat_names <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(stat, <span class="st">"TreatmentPre"</span>),</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>   <span class="fu">paste0</span>(stat, <span class="st">"TreatmentPost"</span>),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>   <span class="fu">paste0</span>(stat, <span class="st">"TreatmentDiff"</span>),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>   <span class="fu">paste0</span>(stat, <span class="st">"PlaceboPre"</span>),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>   <span class="fu">paste0</span>(stat, <span class="st">"PlaceboPost"</span>),</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>   <span class="fu">paste0</span>(stat, <span class="st">"PlaceboDiff"</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a> stat_values <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  treatment_pre_stat,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  treatment_post_stat,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  treatment_diff_stat,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  placebo_pre_stat,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  placebo_post_stat,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  placebo_diff_stat</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a> <span class="fu">names</span>(stat_values) <span class="ot">&lt;-</span> stat_names</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a> <span class="fu">return</span>(stat_values)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Applying function to list of data frames.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>var_stat <span class="ot">&lt;-</span> <span class="fu">summary_stats</span>(bp_list, <span class="st">"var"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var_stat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> varTreatmentPre varTreatmentPost varTreatmentDiff    varPlaceboPre 
+        75.72632         78.99737        341.33333        149.87778 
+  varPlaceboPost   varPlaceboDiff 
+       124.98889        341.33333 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sd_stat <span class="ot">&lt;-</span> <span class="fu">summary_stats</span>(bp_list, <span class="st">"sd"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sd_stat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> sdTreatmentPre sdTreatmentPost sdTreatmentDiff    sdPlaceboPre   sdPlaceboPost 
+       8.702087        8.888046       18.475209       12.242458       11.179843 
+  sdPlaceboDiff 
+      18.475209 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>min_stat <span class="ot">&lt;-</span> <span class="fu">summary_stats</span>(bp_list, <span class="st">"sd"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(min_stat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> sdTreatmentPre sdTreatmentPost sdTreatmentDiff    sdPlaceboPre   sdPlaceboPost 
+       8.702087        8.888046       18.475209       12.242458       11.179843 
+  sdPlaceboDiff 
+      18.475209 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>max_stat <span class="ot">&lt;-</span> <span class="fu">summary_stats</span>(bp_list, <span class="st">"max"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(max_stat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> maxTreatmentPre maxTreatmentPost maxTreatmentDiff    maxPlaceboPre 
+             151              146               33              152 
+  maxPlaceboPost   maxPlaceboDiff 
+             143               33 </code></pre>
+</div>
+</div>
 </section>
 
 </main>
