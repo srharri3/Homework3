@@ -11,11 +11,14 @@ load("hw2_list.rda")
 ```
 
 # Task 1: Control Flow Practice
+
 ```{r}
 bp_list$treatment$status <- character(20)
 bp_list$placebo$status <- character(10)
 ```
+
 Create a for loop and use if/then/else logic to create the status column’s values for treatment.
+
 ```{r}
 status_list <- c()
 for (i in bp_list$treatment$post_bp) {
@@ -27,7 +30,9 @@ for (i in bp_list$treatment$post_bp) {
   }}
 bp_list$treatment$status <- status_list
 ```
+
 Create a for loop and use if/then/else logic to create the status column’s values for placebo.
+
 ```{r}
 status_list2 <- c()
 for (i in bp_list$placebo$post_bp) {
@@ -41,7 +46,9 @@ bp_list$placebo$status <- status_list2
 ```
 
 # Task 2: Function Writing
-Creating function with default value set to mean. Getting the function from the quoted string using my_fun <- get(stat). Returning a named list with stat values.
+
+Creating function with default value set to mean. Getting the function from the quoted string using my_fun \<- get(stat). Returning a named list with stat values.
+
 ```{r}
 summary_stats <- function(bp_list, stat = "mean") {
  my_fun <- get(stat)
@@ -82,6 +89,7 @@ summary_stats <- function(bp_list, stat = "mean") {
 ```
 
 Applying function to list of data frames.
+
 ```{r}
 var_stat <- summary_stats(bp_list, "var")
 print(var_stat)
@@ -95,4 +103,3 @@ print(min_stat)
 max_stat <- summary_stats(bp_list, "max")
 print(max_stat)
 ```
-
